@@ -3,7 +3,7 @@
 Fast game development using WebGL.
 
 ## Current state
- * [ ] WebGL frame initialization
+ * [X] WebGL frame initialization
  * [ ] Full frame
  * [ ] Full screen (LD compatible)
  * [ ] Resource downloading screen

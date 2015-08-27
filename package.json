@@ -1,0 +1,30 @@
+{
+  "name": "Rapidframe.js",
+  "version": "0.0.1",
+  "description": "WebGL fast game development",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carlmartus/rapidframe.js.git"
+  },
+  "keywords": [
+    "webgl",
+    "fast",
+    "development",
+    "rapid",
+    "frame",
+    "glsl",
+    "shader",
+    "texture"
+  ],
+  "author": "Martin Sandgren",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/carlmartus/rapidframe.js/issues"
+  },
+  "dependencies": {
+	  "gulp": "3.8.11",
+	  "gulp-uglify": "1.2.0",
+	  "gulp-concat": "2.5.2",
+	  "gulp-shell": "0.4.2"
+  }
+}
