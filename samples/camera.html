@@ -1,0 +1,61 @@
+<html>
+
+<head>
+<meta charset="utf-8">
+</head>
+
+<body onload="main()">
+<canvas width="400" height="300" id="can"></canvas>
+
+<script>
+'use strict';
+var rf, gl;
+
+var GLSL_VERT = `
+attribute vec2 at_loc;
+
+void main() {
+	gl_Position = vec4(at_loc, 0, 1);
+}`;
+
+var GLSL_FRAG = `
+void main() {
+	gl_FragColor = vec4(1, 0, 0, 1);
+}`;
+
+function main() {
+	rf = new rfGame('can');
+	gl = rf.setupWebGl({antialias: false});
+
+	// Shader
+	var program = new rfProgram(gl);
+	program.addShaderText(GLSL_VERT, program.VERT, program.MEDIUMP);
+	program.addShaderText(GLSL_FRAG, program.FRAG, program.MEDIUMP);
+	program.link();
+
+	// VBA
+	var vertData = [
+		0.0, 0.0,
+		1.0, 0.0,
+		0.0, 1.0,
+	];
+	var vba = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, vba);
+	gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertData), gl.STATIC_DRAW);
+
+	gl.clearColor(0.6, 0.7, 0.8, 1.0);
+	gl.clear(gl.COLOR_BUFFER_BIT);
+
+	// Draw content
+	program.use();
+	rf.glArrayCount(1);
+	gl.vertexAttribPointer(0, 2, gl.FLOAT, gl.FALSE, 0, 0);
+	gl.drawArrays(gl.TRIANGLES, 0, 3);
+}
+</script>
+
+<script type="text/javascript" src="../rapidframe.js"></script>
+</body>
+
+</html>
+

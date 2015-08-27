@@ -12,6 +12,8 @@ Fast game development using WebGL.
  * [ ] Vectors (2D-4D)
  * [ ] Matrices (4x4)
  * [ ] Shared shader uniforms constants
+ * [ ] Keyboard events
+ * [ ] Mouse events
 
 ## Game project templates
 The directory ```templates``` contains a few templates for starting a new project.

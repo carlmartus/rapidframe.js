@@ -9,10 +9,11 @@
 
 <script>
 'use strict';
+var rf, gl;
 
 function main() {
-	var rf = new rfGame('can');
-	var gl = rf.setupWebGl();
+	rf = new rfGame('can');
+	gl = rf.setupWebGl();
 
 	gl.clearColor(0.6, 0.7, 0.8, 1.0);
 	gl.clear(gl.COLOR_BUFFER_BIT);
