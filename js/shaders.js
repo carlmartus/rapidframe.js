@@ -1,6 +1,7 @@
 function rfProgram(gl) {
 	this.gl = gl;
 	this.program = gl.createProgram();
+	this.uniformLinks = []
 }
 
 rfProgram.prototype.VERT = 1;
@@ -43,5 +44,25 @@ rfProgram.prototype.getUniform = function(name) {
 
 rfProgram.prototype.use = function() {
 	this.gl.useProgram(this.program);
+	for (var i=0; i<this.uniformLinks.length; i++) {
+		var link = this.uniformLinks[i];
+		if (link[0] != link[1].magic) {
+			link[1].cb(gl, link[2]);
+			link[0] = link[1].magic;
+		}
+	}
 };
+
+rfProgram.prototype.addUniformLink = function(uniform) {
+	var loc = this.getUniform(uniform.name);
+
+	this.uniformLinks.push([0, uniform, loc]);
+};
+
+
+function rfUniformLink(name, cb) {
+	this.magic = 1;
+	this.name = name;
+	this.cb = cb;
+}
 

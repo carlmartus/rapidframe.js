@@ -9,29 +9,43 @@
 
 <script>
 'use strict';
-var rf, gl;
+var rf, gl, camera;
 
 var GLSL_VERT = `
 attribute vec2 at_loc;
+uniform mat4 un_mvp;
 
 void main() {
-	gl_Position = vec4(at_loc, 0, 1);
+	gl_Position = un_mvp*vec4(at_loc, 0, 1);
 }`;
 
 var GLSL_FRAG = `
 void main() {
-	gl_FragColor = vec4(1, 0, 0, 1);
+	gl_FragColor = vec4(1, 1, 0, 1);
 }`;
 
 function main() {
 	rf = new rfGame('can');
 	gl = rf.setupWebGl({antialias: false});
 
+	camera = rfMat4_create();
+	rfMat4_camera(camera, 1.4, 1.333, 0.1, 20.0,
+			rfVec3_parse(4.0, 4.0, 2.0),
+			rfVec3_parse(0.0, 0.0, 0.0),
+			rfVec3_parse(0.0, 0.0, 1.0));
+
+	// Uniform link
+	var unMvp = new rfUniformLink('un_mvp', function(gl, loc) {
+		console.log('UNI', gl, loc, camera);
+		gl.uniformMatrix4fv(loc, false, camera);
+	});
+
 	// Shader
 	var program = new rfProgram(gl);
 	program.addShaderText(GLSL_VERT, program.VERT, program.MEDIUMP);
 	program.addShaderText(GLSL_FRAG, program.FRAG, program.MEDIUMP);
 	program.link();
+	program.addUniformLink(unMvp);
 
 	// VBA
 	var vertData = [

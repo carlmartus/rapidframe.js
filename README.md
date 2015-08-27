@@ -7,11 +7,11 @@ Fast game development using WebGL.
  * [ ] Full frame
  * [ ] Full screen (LD compatible)
  * [ ] Resource downloading screen
- * [ ] GLSL Shader loading
+ * [X] GLSL Shader loading
  * [ ] Texture loading
- * [ ] Vectors (2D-4D)
- * [ ] Matrices (4x4)
- * [ ] Shared shader uniforms constants
+ * [X] Vectors (2D-4D)
+ * [X] Matrices (4x4)
+ * [X] Shared shader uniforms constants
  * [ ] Keyboard events
  * [ ] Mouse events
 
