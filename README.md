@@ -6,6 +6,7 @@ Fast game development using WebGL.
  * [X] WebGL frame initialization
  * [ ] Full frame
  * [ ] Full screen (LD compatible)
+ * [ ] Mouse capture
  * [ ] Resource downloading screen
  * [X] GLSL Shader loading
  * [ ] Texture loading
@@ -14,6 +15,8 @@ Fast game development using WebGL.
  * [X] Shared shader uniforms constants
  * [ ] Keyboard events
  * [ ] Mouse events
+ * [ ] 2D sprite
+ * [ ] 2D font
 
 ## Game project templates
 The directory ```templates``` contains a few templates for starting a new project.

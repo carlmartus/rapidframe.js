@@ -66,3 +66,7 @@ function rfUniformLink(name, cb) {
 	this.cb = cb;
 }
 
+rfUniformLink.prototype.update = function() {
+	this.magic++;
+};
+

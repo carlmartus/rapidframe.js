@@ -3,6 +3,20 @@ function rfGame(tagId) {
 	this.gl = null;
 	this.gl_arrayCount = 0;
 	this.cbResize = null;
+
+	this.blockRender = false;
+	this.enabledFullscreen = false;
+	this.enabledKeyboard = false;
+	this.keyBinds = {};
+
+	var self = this;
+
+	window.addEventListener('blur', function() {
+		self.blockRender = true;
+	});
+	window.addEventListener('focus', function() {
+		self.blockRender = false;
+	});
 }
 
 rfGame.prototype.setupWebGl = function(webGlOptions) {
@@ -14,13 +28,17 @@ rfGame.prototype.setupWebGl = function(webGlOptions) {
 	} catch (e) {}
 
 	if (this.gl == null) {
-		this.gl = tag.getContext('experimental-webgl', webGlOptions);
+		try {
+			this.gl = tag.getContext('experimental-webgl', webGlOptions);
+		} catch (e) {
+			alert('Could not initialize WebGL');
+		}
 	}
 
 	return this.gl;
 };
 
-rfGame.prototype.startLoop = function(frame) {
+rfGame.prototype.startLoop = function(frame, render) {
 	var lastTime = Date.now();
 
 	var requestAnimFrame;
@@ -32,15 +50,48 @@ rfGame.prototype.startLoop = function(frame) {
 		};
 	}
 
+	var self = this;
 	function clo() {
 		var now = Date.now();
-		if (!func((now - lastTime) * 0.001)) {
+		if (frame((now - lastTime) * 0.001, !self.blockRender)) {
+			if (!self.blockRender) render();
 			requestAnimationFrame(clo);
 		}
 		lastTime = now;
 	}
 
 	requestAnimationFrame(clo);
+};
+
+rfGame.prototype.isFullscreen = function(on) {
+	return this.enabledFullscreen;
+};
+
+rfGame.prototype.setFullscreen = function(on) {
+};
+
+rfGame.prototype.setMouseMoveCallback = function(cb) {
+};
+
+rfGame.prototype._keyEvent = function(event, press) {
+	console.log('Key', event.keyCode, press);
+	var bind = this.keyBinds[event.keyCode];
+	if (bind) bind(event.keyCode, press, event);
+};
+
+rfGame.prototype.bindKey = function(key, cb) {
+	var self = this;
+	if (!this.enabledKeyboard) {
+		document.addEventListener('keydown', function(event) {
+			self._keyEvent(event.keyCode, true);
+		});
+		document.addEventListener('keyup', function(event) {
+			self._keyEvent(event.keyCode, false);
+		});
+		this.enabledKeyboard = true;
+	}
+
+	this.keyBinds[key] = cb;
 };
 
 rfGame.prototype.setResizeCallback = function(cb) {
