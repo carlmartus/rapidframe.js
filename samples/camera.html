@@ -59,6 +59,32 @@ function main() {
 	rf = new rfGame('can');
 	gl = rf.setupWebGl({antialias: false});
 
+	rf.bindKey(70, function(key, press) {
+		if (press) {
+			var current = rf.isFullscreen();
+			rf.setFullscreen(!current);
+		}
+	});
+
+	rf.bindKey(77, function(key, press) {
+		if (press) {
+			rf.autoCaptureMouse();
+		}
+	});
+
+	rf.setMouseCallback(function(x, y, dx, dy) {
+		console.log('Move', x, y, dx, dy);
+	}, function(press) {
+		console.log('Press', press);
+	});
+
+	rf.setLogKeys(true);
+	rf.autoCaptureMouse(true);
+
+	rf.setResizeCallback(function(w, h) {
+		gl.viewport(0, 0, w, h);
+	});
+
 	// Uniform link
 	unMvp = new rfUniformLink('un_mvp', function(gl, loc) {
 		gl.uniformMatrix4fv(loc, false, camera);
