@@ -68,7 +68,7 @@ function main() {
 
 	rf.bindKey(77, function(key, press) {
 		if (press) {
-			rf.autoCaptureMouse();
+			rf.captureMouse();
 		}
 	});
 
@@ -79,7 +79,7 @@ function main() {
 	});
 
 	rf.setLogKeys(true);
-	rf.autoCaptureMouse(true);
+	rf.captureMouse(true);
 
 	rf.setResizeCallback(function(w, h) {
 		gl.viewport(0, 0, w, h);

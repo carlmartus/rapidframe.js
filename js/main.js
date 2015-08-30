@@ -91,7 +91,7 @@ rfGame.prototype.startLoop = function(frame, render) {
 	requestAnimationFrame(clo);
 };
 
-rfGame.prototype.autoCaptureMouse = function() {
+rfGame.prototype.captureMouse = function() {
 	var el = this.tag;
 
 	if (el.requestPointerLock) {
