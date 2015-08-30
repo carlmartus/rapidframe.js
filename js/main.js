@@ -8,6 +8,7 @@ function rfGame(tagId) {
 	this.gl = null;
 	this.gl_arrayCount = 0;
 	this.mouseAutoCapture = false;
+	this.gameState = null;
 
 	this.cbResize = null;
 	this.cbMouseMove = null;
@@ -89,6 +90,10 @@ rfGame.prototype.startLoop = function(frame, render) {
 	}
 
 	requestAnimationFrame(clo);
+};
+
+rfGame.prototype.setState = function(state) {
+	this.gameState = state;
 };
 
 rfGame.prototype.captureMouse = function() {
