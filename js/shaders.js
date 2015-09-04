@@ -18,13 +18,13 @@ rfProgram.prototype.addShaderId = function(idName, type, header) {
 rfProgram.prototype.addShaderText = function(text, type, header) {
 	if (header) text = header + text;
 
-	var shader = gl.createShader(type == this.FRAG ?
-			gl.FRAGMENT_SHADER:gl.VERTEX_SHADER);
-	gl.shaderSource(shader, text);
-	gl.compileShader(shader);
+	var shader = this.gl.createShader(type == this.FRAG ?
+			this.gl.FRAGMENT_SHADER:this.gl.VERTEX_SHADER);
+	this.gl.shaderSource(shader, text);
+	this.gl.compileShader(shader);
 
-	if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-		alert(gl.getShaderInfoLog(shader));
+	if (!this.gl.getShaderParameter(shader, this.gl.COMPILE_STATUS)) {
+		alert(this.gl.getShaderInfoLog(shader));
 	}
 
 	this.gl.attachShader(this.program, shader);
