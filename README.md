@@ -4,12 +4,12 @@ Fast game development using WebGL.
 
 ## Current state
  * [X] WebGL frame initialization
- * [ ] Full frame
+ * [X] Full frame
  * [X] Full screen (LD compatible)
  * [X] Mouse capture
- * [ ] Resource downloading screen
+ * [X] Resource downloading screen
  * [X] GLSL Shader loading
- * [ ] Texture loading
+ * [X] Texture loading
  * [X] Vectors (2D-4D)
  * [X] Matrices (4x4)
  * [X] Shared shader uniforms constants

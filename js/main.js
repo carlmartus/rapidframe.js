@@ -16,6 +16,7 @@ function rfGame(tagId) {
 
 	this.blockRender = false;
 	this.enabledFullscreen = false;
+	this.enabledFullframe = false,
 	this.enabledKeyboard = false;
 	this.enabledMouse = false;
 	this.enabledLogKeys = false;
@@ -135,6 +136,12 @@ rfGame.prototype.setFullscreen = function(on) {
 	}
 };
 
+rfGame.prototype.enableFullFrame = function() {
+	this.enabledFullframe = true,
+	this.tag.style = 'padding: 0px; margin: 0px; position: absolute; left: 0px; top: 0px;';
+	this._resize();
+};
+
 rfGame.prototype.bindKey = function(key, cb) {
 	var self = this;
 	if (!this.enabledKeyboard) {
@@ -178,7 +185,17 @@ rfGame.prototype.glArrayCount = function(count) {
 // ========
 
 rfGame.prototype._resize = function() {
-	this.cbResize(this.tag.width, this.tag.height);
+	if (this.enabledFullframe) {
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+
+		this.tag.width = w;
+		this.tag.height = h;
+	}
+
+	if (this.cbResize) {
+		this.cbResize(this.tag.width, this.tag.height);
+	}
 };
 
 rfGame.prototype._keyEvent = function(event, press) {
