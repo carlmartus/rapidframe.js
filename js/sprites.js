@@ -1,16 +1,14 @@
-RF_SPRITE_GLSL_VERT = `
-attribute vec3 at_loc;
+RF_SPRITE_GLSL_VERT =
+"attribute vec3 at_loc;" + "\n" +
+"" + "\n" +
+"void main() {" + "\n" +
+"	gl_Position = vec4(at_loc.xy, 0, 1);" + "\n" +
+"}";
 
-void main() {
-	gl_Position = vec4(at_loc.xy, 0, 1);
-}
-`;
-
-RF_SPRITE_GLSL_FRAG = `
-void main() {
-	gl_FragColor = vec4(0, 1, 0, 1);
-}
-`;
+RF_SPRITE_GLSL_FRAG =
+"void main() {" + "\n" +
+"	gl_FragColor = vec4(0, 1, 0, 1);" + "\n" +
+"}";
 
 function rfSprites(gl, texture, maxSprites) {
 	this.gl = gl;
