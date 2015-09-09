@@ -58,6 +58,10 @@ function render() {
 function main() {
 	rf = new rfGame('can');
 	gl = rf.setupWebGl({antialias: false});
+	rf.setResizeCallback(function(w, h) {
+		gl.viewport(0, 0, w, h);
+	});
+	rf.enableFullFrame();
 
 	rf.bindKey(70, function(key, press) {
 		if (press) {
