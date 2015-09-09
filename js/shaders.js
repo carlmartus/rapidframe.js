@@ -36,6 +36,10 @@ rfProgram.prototype.bindAttribute = function(id, name) {
 
 rfProgram.prototype.link = function() {
 	this.gl.linkProgram(this.program);
+
+	if (!this.gl.getProgramParameter(this.program, this.gl.LINK_STATUS)) {
+		alert(this.gl.getProgramInfoLog(this.program));
+	}
 };
 
 rfProgram.prototype.getUniform = function(name) {
