@@ -5,9 +5,9 @@ var shell = require('gulp-shell');
 
 gulp.task('js', function() {
 	return gulp.src(['js/*.js', 'gen/*.js'])
-		.pipe(concat('rapidframe.js'))
-		//.pipe(concat('rapidframe.min.js'))
-		//.pipe(uglify())
+		//.pipe(concat('rapidframe.js'))
+		.pipe(concat('rapidframe.min.js'))
+		.pipe(uglify())
 		.pipe(gulp.dest('.'));
 });
 
