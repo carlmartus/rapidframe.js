@@ -15,15 +15,16 @@ rfLoader.prototype.loadImage = function(url) {
 	return obj;
 }
 
-rfLoader.prototype.loadTexture = function(gl, url, filterMag, filterMin, generateMipMap) {
+rfLoader.prototype.loadTexture = function(gl, url, filterMag, filterMin) {
 	var tex = gl.createTexture();
 	this.list.push([tex, url, this.LOAD_TEXTURE]);
 	gl.bindTexture(gl.TEXTURE_2D, tex);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, filterMag);
 	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filterMag);
+	/*
 	if (generateMipMap) {
 		gl.generateMipmap(gl.TEXTURE_2D);
-	}
+	}*/
 	return tex;
 }
 
@@ -66,14 +67,22 @@ function renderGlLoadingScreen(gl, step, count) {
 	gl.disable(gl.SCISSOR_TEST);
 
 	gl.viewport(x, y, w, h);
-}
+};
 
 rfLoader.prototype.downloadWithGlScreen = function(gl, callback) {
 	renderGlLoadingScreen(gl, 0, 1);
 	return this.download(callback, function(step, count) {
 		renderGlLoadingScreen(gl, step, count);
 	}, gl);
-}
+};
+
+function createTextureDownload(callb, obj, img) {
+	return function(a, b) {
+		gl.bindTexture(gl.TEXTURE_2D, obj);
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+		callb(a, b);
+	};
+};
 
 rfLoader.prototype.download = function(callback, step, gl) {
 	var length = this.list.length;
@@ -82,7 +91,7 @@ rfLoader.prototype.download = function(callback, step, gl) {
 	for (var i=0; i<this.list.length; i++) {
 		var entry = this.list[i];
 		var obj = entry[0];
-		var url = entry[1];
+		var listUrl = entry[1];
 		var type = entry[2];
 
 		var func = (function(obj, url) {
@@ -96,30 +105,26 @@ rfLoader.prototype.download = function(callback, step, gl) {
 					callback();
 				}
 			}
-		})(obj, url);
+		})(obj, listUrl);
 
 		switch (type) {
 			default :
 			case this.LOAD_IMAGE :
 				obj.onload = func;
-				obj.src = url;
+				obj.src = listUrl;
 				break;
 
 			case this.LOAD_AUDIO :
 				obj.addEventListener('canplaythrough', func, false);
-				obj.src = url;
+				obj.src = listUrl;
 				break;
 
 			case this.LOAD_TEXTURE :
 				var img = new Image();
-				img.onload = function(a, b) {
-					gl.bindTexture(gl.TEXTURE_2D, obj);
-					gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-					func(a, b);
-				};
-				img.src = url;
+				img.onload = createTextureDownload(func, obj, img);
+				img.src = listUrl;
 				break;
 		}
 	}
-}
+};
 
