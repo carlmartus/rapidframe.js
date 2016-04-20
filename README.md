@@ -2,7 +2,7 @@
 
 # Rapidframe.js v1.0.0-dev
 
-Fast game development using WebGL and Javascript.
+Fast game development using WebGL and Javascript for modern web browsers.
 
 ## Current state
  * [X] WebGL frame initialization
@@ -20,6 +20,8 @@ Fast game development using WebGL and Javascript.
  * [ ] 2D sprite
  * [ ] 2D font
  * [ ] On screen button binds for phones
+ * [ ] Sounds with stereo effect and volume
+ * [ ] Tiles collisios detection
 
 ## Game project templates
 The directory ```templates``` contains a few templates for starting a new project.
