@@ -1,11 +1,13 @@
-# Rapidframe.js
+![extra](extra/logo.png)
 
-Fast game development using WebGL.
+# Rapidframe.js v1.0.0-dev
+
+Fast game development using WebGL and Javascript.
 
 ## Current state
  * [X] WebGL frame initialization
  * [X] Full frame
- * [X] Full screen (LD compatible)
+ * [X] Full screen (Ludum Dare compatible)
  * [X] Mouse capture
  * [X] Resource downloading screen
  * [X] GLSL Shader loading
@@ -17,6 +19,7 @@ Fast game development using WebGL.
  * [X] Mouse events
  * [ ] 2D sprite
  * [ ] 2D font
+ * [ ] On screen button binds for phones
 
 ## Game project templates
 The directory ```templates``` contains a few templates for starting a new project.
