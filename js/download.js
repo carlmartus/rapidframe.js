@@ -1,3 +1,9 @@
+/**
+ * Content downloader for images, audio clips and images directly converted to
+ * OpenGL textures. Async callback when all downloadeds are completed. A simple
+ * OpenGL download progressbar can be rendered.
+ * @class
+ */
 function rfLoader() {
 	this.list = [];
 }
@@ -9,12 +15,23 @@ rfLoader.prototype.LOAD_TEXTURE = 3;
 rfLoader.prototype.GLLOD_BG = 16;
 rfLoader.prototype.GLLOD_FG = 12;
 
+/**
+ * Queue Image to download.
+ * @param {string} url Image URL
+ * @return {Image}
+ */
 rfLoader.prototype.loadImage = function(url) {
 	var obj = new Image();
 	this.list.push([obj, url, this.LOAD_IMAGE]);
 	return obj;
 }
 
+/**
+ * Queue Image download. When the file is downloaded it will be converted to a
+ * OpenGL texture.
+ * @param {string} url Image URL
+ * @return {GlTexture}
+ */
 rfLoader.prototype.loadTexture = function(gl, url, filterMag, filterMin) {
 	var tex = gl.createTexture();
 	this.list.push([tex, url, this.LOAD_TEXTURE]);
@@ -28,6 +45,11 @@ rfLoader.prototype.loadTexture = function(gl, url, filterMag, filterMin) {
 	return tex;
 }
 
+/**
+ * Queue Audio clip download.
+ * @param {string} url Image URL
+ * @return {Audio}
+ */
 rfLoader.prototype.loadAudio = function(url) {
 	var obj = new Audio();
 	this.list.push([obj, url, this.LOAD_AUDIO]);
@@ -69,6 +91,23 @@ function renderGlLoadingScreen(gl, step, count) {
 	gl.viewport(x, y, w, h);
 };
 
+/**
+ * Callback executed each time one of the download are completed.
+ * @callback downloadsStep
+ * @param {number} step Amount of files downloaded
+ * @param {number} count Total amount of both finnished and und
+ */
+
+/**
+ * Callback executed when all downloads are completed.
+ * @callback downloadsCompleted
+ */
+
+/**
+ * Display OpenGL download progress bar.
+ * @param {GlContext} gl OpenGL target
+ * @param {downloadsCompleted} callback When downloads are completed
+ */
 rfLoader.prototype.downloadWithGlScreen = function(gl, callback) {
 	renderGlLoadingScreen(gl, 0, 1);
 	return this.download(callback, function(step, count) {
@@ -76,14 +115,21 @@ rfLoader.prototype.downloadWithGlScreen = function(gl, callback) {
 	}, gl);
 };
 
-function createTextureDownload(callb, obj, img) {
+function createTextureDownload(callback, obj, img) {
 	return function(a, b) {
 		gl.bindTexture(gl.TEXTURE_2D, obj);
 		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
-		callb(a, b);
+		callback(a, b);
 	};
 };
 
+
+/**
+ * Async callback for downloads.
+ * @param {downloadsCompleted} callback When downloads are completed
+ * @param {downloadsStep} step When one of the downloads are completed
+ * @param {GlContext} [gl]
+ */
 rfLoader.prototype.download = function(callback, step, gl) {
 	var length = this.list.length;
 	var left = length;

@@ -1,11 +1,21 @@
-# Rapidframe.js
+![extra](extra/logo.png)
 
-Fast game development using WebGL.
+# Rapidframe.js v1.0.0-dev
 
-## Current state
+Fast game development using WebGL and Javascript for modern web browsers.
+
+# Documentation
+
+Can be found [here](http://martus.se/rapidframe/doc/).
+
+## Repository branches
+The branch `master` contains the newest released version. `next` is upcoming and
+`dev` is internal.
+
+# Current state
  * [X] WebGL frame initialization
  * [X] Full frame
- * [X] Full screen (LD compatible)
+ * [X] Full screen (Ludum Dare compatible)
  * [X] Mouse capture
  * [X] Resource downloading screen
  * [X] GLSL Shader loading
@@ -15,9 +25,13 @@ Fast game development using WebGL.
  * [X] Shared shader uniforms constants
  * [X] Keyboard events
  * [X] Mouse events
- * [ ] 2D sprite
+ * [ ] 2D sprite system
  * [ ] 2D font
+ * [ ] On screen button binds for phones
+ * [ ] Sounds with HTML5 stereo effect and volume
+ * [ ] Tiles collisios detection
+ * [ ] Looped ambient sounds
 
-## Game project templates
+# Game project templates
 The directory ```templates``` contains a few templates for starting a new project.
 
