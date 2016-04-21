@@ -1,3 +1,8 @@
+/**
+ * Create a Rapidframe instance bound to a canvas.
+ * @param {string} tagId HTML id of the canvas to be used
+ * @class
+ */
 function rfGame(tagId) {
 	var self = this;
 
@@ -51,6 +56,12 @@ function rfGame(tagId) {
 	}
 }
 
+/**
+ * Creat a WebGL instance. The options that can be passed are for example:
+ * { antialias: false }, to disable antialiasing.
+ * @param webGlOptions Standard WebGL options.
+ * @return {GlContext} WebGL Context.
+ */
 rfGame.prototype.setupWebGl = function(webGlOptions) {
 	this.gl = null;
 	try {
@@ -68,6 +79,25 @@ rfGame.prototype.setupWebGl = function(webGlOptions) {
 	return this.gl;
 };
 
+/**
+ * Frame callback for gameloop.
+ * @callback frame
+ * @param {float} ft Seconds passed since last loop.
+ * @param {boolean} hidden Is the frame hidden from rendering right now?
+ * @return {boolean} True if the loop should abort.
+ */
+
+/**
+ * Render callback for gameloop.
+ * @callback render
+ */
+
+/**
+ * Create a async game loop.
+ * @param {frame} Callback for each frame in game loop.
+ * @param {render} Callback for each render in game loop. Will not be called if
+ * area is not being dislayed.
+ */
 rfGame.prototype.startLoop = function(frame, render) {
 	var lastTime = Date.now();
 
