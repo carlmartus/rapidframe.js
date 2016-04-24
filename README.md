@@ -29,8 +29,8 @@ The branch `master` contains the newest released version. `next` is upcoming and
  * [X] Shared shader uniforms constants
  * [X] Keyboard events
  * [X] Mouse events
+ * [X] Documentation
  * [ ] Mouse event button id
- * [ ] Documentation
  * [ ] 2D sprite system
  * [ ] 2D font
  * [ ] On screen button binds for phones
