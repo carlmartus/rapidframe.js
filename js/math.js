@@ -1,6 +1,10 @@
 // Vector 2 component
 // ===================
 
+/**
+ * Create 2D float vector.
+ * @class rfVec2
+ */
 function rfVec2_create() {
 	return new Float32Array([0.0, 0.0]);
 }

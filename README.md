@@ -29,6 +29,7 @@ The branch `master` contains the newest released version. `next` is upcoming and
  * [X] Shared shader uniforms constants
  * [X] Keyboard events
  * [X] Mouse events
+ * [ ] Mouse event button id
  * [ ] Documentation
  * [ ] 2D sprite system
  * [ ] 2D font
@@ -36,6 +37,7 @@ The branch `master` contains the newest released version. `next` is upcoming and
  * [ ] Sounds with HTML5 stereo effect and volume
  * [ ] Tiles collisios detection
  * [ ] Looped ambient sounds
+ * [ ] Pixel scale up factor for canvas
 
 # Game project templates
 The directory ```templates``` contains a few templates for starting a new project.
