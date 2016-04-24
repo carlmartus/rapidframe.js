@@ -1,8 +1,12 @@
 ![extra](extra/logo.png)
 
-# Rapidframe.js v1.0.0-dev
+# Rapidframe.js v1.0.0
 
-Fast game development using WebGL and Javascript for modern web browsers.
+Fast game development using *WebGL* and *Javascript* for modern web browsers.
+
+To use this library you need to have a understanding of *OpenGL*, this libraray
+is ment to provide functionallity fo a selection of common operations done in
+*OpenGL*
 
 # Documentation
 
@@ -25,12 +29,15 @@ The branch `master` contains the newest released version. `next` is upcoming and
  * [X] Shared shader uniforms constants
  * [X] Keyboard events
  * [X] Mouse events
+ * [ ] Mouse event button id
+ * [ ] Documentation
  * [ ] 2D sprite system
  * [ ] 2D font
  * [ ] On screen button binds for phones
  * [ ] Sounds with HTML5 stereo effect and volume
  * [ ] Tiles collisios detection
  * [ ] Looped ambient sounds
+ * [ ] Pixel scale up factor for canvas
 
 # Game project templates
 The directory ```templates``` contains a few templates for starting a new project.

@@ -106,7 +106,7 @@ function renderGlLoadingScreen(gl, step, count) {
 /**
  * Display OpenGL download progress bar.
  * @param {GlContext} gl OpenGL target
- * @param {downloadsCompleted} callback When downloads are completed
+ * @param {downloadsCompleted} Callback When downloads are completed
  */
 rfLoader.prototype.downloadWithGlScreen = function(gl, callback) {
 	renderGlLoadingScreen(gl, 0, 1);

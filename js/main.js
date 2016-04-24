@@ -1,3 +1,8 @@
+/**
+ * Create a Rapidframe instance bound to a canvas.
+ * @param {string} tagId HTML id of the canvas to be used
+ * @class
+ */
 function rfGame(tagId) {
 	var self = this;
 
@@ -8,7 +13,6 @@ function rfGame(tagId) {
 	this.gl = null;
 	this.gl_arrayCount = 0;
 	this.mouseAutoCapture = false;
-	this.gameState = null;
 
 	this.cbResize = null;
 	this.cbMouseMove = null;
@@ -51,6 +55,12 @@ function rfGame(tagId) {
 	}
 }
 
+/**
+ * Creat a WebGL instance. The options that can be passed are for example:
+ * { antialias: false }, to disable antialiasing.
+ * @param webGlOptions Standard WebGL options.
+ * @return {GlContext} WebGL Context.
+ */
 rfGame.prototype.setupWebGl = function(webGlOptions) {
 	this.gl = null;
 	try {
@@ -68,6 +78,25 @@ rfGame.prototype.setupWebGl = function(webGlOptions) {
 	return this.gl;
 };
 
+/**
+ * Frame callback for gameloop.
+ * @callback frame
+ * @param {float} ft Seconds passed since last loop.
+ * @param {boolean} hidden Is the frame hidden from rendering right now?
+ * @return {boolean} True if the loop should abort.
+ */
+
+/**
+ * Render callback for gameloop.
+ * @callback render
+ */
+
+/**
+ * Create a async game loop.
+ * @param {frame} Callback for each frame in game loop.
+ * @param {render} Callback for each render in game loop. Will not be called if
+ * area is not being dislayed.
+ */
 rfGame.prototype.startLoop = function(frame, render) {
 	var lastTime = Date.now();
 
@@ -93,10 +122,9 @@ rfGame.prototype.startLoop = function(frame, render) {
 	requestAnimationFrame(clo);
 };
 
-rfGame.prototype.setState = function(state) {
-	this.gameState = state;
-};
-
+/**
+ * Request the browser to lock and hide the mouse. Useful for FPS-games.
+ */
 rfGame.prototype.captureMouse = function() {
 	var el = this.tag;
 
@@ -109,6 +137,26 @@ rfGame.prototype.captureMouse = function() {
 	}
 };
 
+/**
+ * Mouse movement event callback.
+ * @callback mouseMove
+ * @param {int} x Absolute X position
+ * @param {int} y Absolute Y position
+ * @param {int} dx Relative X position
+ * @param {int} dy Relative Y position
+ */
+
+/**
+ * Mouse button event callback.
+ * @callback mouseButton
+ * @param {boolean} press Button down
+ */
+
+/**
+ * Set callback to listen for mouse events
+ * @param {mouseMove} cbMove Movement callback
+ * @param {mouseButton} cbClick Button callback
+ */
 rfGame.prototype.setMouseCallback = function(cbMove, cbClick) {
 	this.cbMouseMove = cbMove;
 	this.cbMouseClick = cbClick;
@@ -118,10 +166,18 @@ rfGame.prototype.setMouseCallback = function(cbMove, cbClick) {
 	}
 };
 
+/**
+ * Is game frame fullscreen?
+ * @return {boolean} on Fullscreen?
+ */
 rfGame.prototype.isFullscreen = function(on) {
 	return this.enabledFullscreen;
 };
 
+/**
+ * Set frame fullscreen mode.
+ * @param {boolean} on Set on
+ */
 rfGame.prototype.setFullscreen = function(on) {
 	if (on && !this.enabledFullscreen) {
 		_goFullscreen(this.tag);
@@ -136,12 +192,30 @@ rfGame.prototype.setFullscreen = function(on) {
 	}
 };
 
+/**
+ * Enable frame full browser frame covering. Similar to fullscreen except the
+ * frame only covers the browser window.
+ */
 rfGame.prototype.enableFullFrame = function() {
 	this.enabledFullframe = true,
 	this.tag.style = 'padding: 0px; margin: 0px; position: absolute; left: 0px; top: 0px;';
 	this._resize();
 };
 
+/**
+ * Keyboard event callback.
+ * @callback keyEvent
+ * @param {int} key Key number id
+ * @param {boolean} pres True if press, false if release
+ * @param event DOM event
+ */
+
+/**
+ * Bind callback to keyboard event. Activate setLogKey to print key codes to
+ * console.
+ * @param {int} key Key id number (http://keycode.info/)
+ * @param {keyEvent} cb Event callback
+ */
 rfGame.prototype.bindKey = function(key, cb) {
 	var self = this;
 	if (!this.enabledKeyboard) {
@@ -157,20 +231,38 @@ rfGame.prototype.bindKey = function(key, cb) {
 	this.keyBinds[key] = cb;
 };
 
+/**
+ * Enable key event logging.
+ * @param {boolean} on Enable
+ */
 rfGame.prototype.setLogKeys = function(on) {
 	this.enabledLogKeys = on;
 };
 
+/**
+ * Resize callback.
+ * @callback resizeEvent
+ * @param {int} width Frame width
+ * @param {int} Height Frame height
+ */
+
+/**
+ * Set resize event callback.
+ * @param {resizeEvent} event Callback
+ */
 rfGame.prototype.setResizeCallback = function(cb) {
 	this.cbResize = cb;
-};
-
-rfGame.prototype.setMouseMoveCallback = function(cb) {
 };
 
 // GL Misc help
 // ============
 
+/**
+ * Helper function to set OpenGL active array count. Calling
+ * gl.enableVertexAttribArray on all array indexes from 0 to first parameter
+ * (count).
+ * @param {int} count Amount of active OpenGL arrays
+ */
 rfGame.prototype.glArrayCount = function(count) {
 	while (this.gl_arrayCount > count) {
 		this.gl.disableVertexAttribArray(--this.gl_arrayCount);
