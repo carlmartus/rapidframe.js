@@ -2,8 +2,8 @@
 // ===================
 
 /**
- * 2D vector class
  * @class rfVec2
+ * @classdesc Fast 2D vector class
  * @deprecated Use rfVec2_create
  */
 
@@ -112,8 +112,8 @@ function rfVec3_normalize(out, v, len) {
 // ===================
 
 /**
- * 3D vector class
  * @class rfVec3
+ * @classdesc Fast 3D vector class
  * @deprecated Use rfVec3_create
  */
 
@@ -240,8 +240,8 @@ function rfVec3_normalize(out, v, len) {
 // ===================
 
 /**
- * 4x4 matrix class.
  * @class rfMat4
+ * @classdesc Fast 4x4 matrix class.
  * @deprecated Use rfMat4_create
  */
 

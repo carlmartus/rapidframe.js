@@ -1,8 +1,8 @@
 /**
- * Content downloader for images, audio clips and images directly converted to
- * OpenGL textures. Async callback when all downloadeds are completed. A simple
- * OpenGL download progressbar can be rendered.
  * @class
+ * @classdesc Content downloader for images, audio clips and images directly
+ * converted to OpenGL textures. Async callback when all downloadeds are
+ * completed. A simple OpenGL download progressbar can be rendered.
  */
 function rfLoader() {
 	this.list = [];

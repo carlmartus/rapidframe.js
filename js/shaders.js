@@ -1,6 +1,6 @@
 /**
- * OpenGL shader program.
  * @class
+ * @classdesc OpenGL shader program wrapper for easy development.
  * @param {GlContext} WebGL context.
  */
 function rfProgram(gl) {
@@ -153,8 +153,9 @@ rfProgram.prototype.addUniformLink = function(uniform) {
  */
 
 /**
- * Create a linked uniform object.
  * @class
+ * @classdesc Shader uniform constants between multiple shader programs. Look in
+ * github repository samples/camera.html for a sample code.
  * @param {string} name GLSL uniform source name.
  * @param {uniformLink} cb Callback when the constanc needs to be applied.
  */

@@ -1,7 +1,7 @@
 /**
- * Create a Rapidframe instance bound to a canvas.
  * @param {string} tagId HTML id of the canvas to be used
  * @class
+ * @classdesc Rapidframe game loop instance bound to a HTML5 canvas.
  */
 function rfGame(tagId) {
 	var self = this;
