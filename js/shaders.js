@@ -93,6 +93,11 @@ rfProgram.prototype.addShaderText = function(text, type, header) {
 	this.gl.attachShader(this.program, shader);
 };
 
+rfProgram.prototype.addShaderTextDual = function(txtVert, txtFrag, header) {
+	this.addShaderText(txtVert, this.VERT, header);
+	this.addShaderText(txtFrag, this.FRAG, header);
+};
+
 /**
  * Bind a attribute to an OpenGL attribute location. This operation should be
  * executed before linking the program.
@@ -101,6 +106,17 @@ rfProgram.prototype.addShaderText = function(text, type, header) {
  */
 rfProgram.prototype.bindAttribute = function(id, name) {
 	this.gl.bindAttribLocation(this.program, id, name);
+};
+
+/**
+ * Bind a list of attributes in sequential order starting with the first item of
+ * the array as attribute #0.
+ * @param {string[]} arr Array of attribute names
+ */
+rfProgram.prototype.enumerateAttributes = function(arr) {
+	for (var i=0; i<arr.length; i++) {
+		this.bindAttribute(i, arr[i]);
+	}
 };
 
 /** Link OpenGL shader program. */
@@ -145,6 +161,20 @@ rfProgram.prototype.addUniformLink = function(uniform) {
 	this.uniformLinks.push([0, uniform, loc]);
 };
 
+/**
+ * Return a (dictionary) object containing all OpenGL uniforms from the
+ * specified list.
+ * @param {string[]} array List on uniform names to retrieve.
+ * @return Javascript dictionary with uniform name as key and GlUniformLocation
+ * as value.
+ */
+rfProgram.prototype.getUniformObject = function(array) {
+	var dict = {};
+	for (var i=0; i<array.length; i++) {
+		dict[array[i]] = this.getUniform(array[i]);
+	}
+	return dict;
+};
 
 /**
  * @callback uniformLink

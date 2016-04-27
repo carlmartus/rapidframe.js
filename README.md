@@ -39,6 +39,11 @@ The branch `master` contains the newest released version. `next` is upcoming and
  * [ ] Looped ambient sounds
  * [ ] Pixel scale up factor for canvas
 
+## Dev
+ * [ ] Test rfProgram.getUniformObject()
+ * [ ] Index buffers in rfGeometry
+ * [ ] rfProgram.enumerateAttributes(string[]);
+
 # Game project templates
 The directory ```templates``` contains a few templates for starting a new project.
 
