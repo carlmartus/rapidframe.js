@@ -162,6 +162,18 @@ rfProgram.prototype.addUniformLink = function(uniform) {
 };
 
 /**
+ * Automatically set uniform constants for given sampler names. They will be
+ * given a number starting from 0 representing TEXTURE0.
+ * @param {string[]} arr List of texture sampler uniforms.
+ */
+rfProgram.prototype.enumerateTextureUniforms = function(arr) {
+	this.use();
+	for (var i=0; i<arr.length; i++) {
+		this.gl.uniform1i(this.getUniform(arr[i]), i);
+	}
+};
+
+/**
  * Return a (dictionary) object containing all OpenGL uniforms from the
  * specified list.
  * @param {string[]} array List on uniform names to retrieve.

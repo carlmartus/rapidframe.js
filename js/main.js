@@ -75,6 +75,7 @@ rfGame.prototype.setupWebGl = function(webGlOptions) {
 		}
 	}
 
+	//gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
 	return this.gl;
 };
 

@@ -15,6 +15,7 @@ function mainTriangle() {
 
 	gl.clear(gl.COLOR_BUFFER_BIT);
 
+	// Geometry
 	var vertData = new Uint8Array([
 		0, 0,
 		1, 0,
@@ -24,6 +25,7 @@ function mainTriangle() {
 	geo.createBuffer(gl.STATIC_DRAW, vertData);
 	geo.addVertexAttrib(0, 2, gl.UNSIGNED_BYTE, false, 0, 0);
 
+	// Shader
 	var pr = new rfProgram(gl);
 	pr.addShaderTextDual(geoShVert, geoShFrag, pr.MEDIUMP);
 	pr.enumerateAttributes(['atLoc']);

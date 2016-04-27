@@ -44,6 +44,7 @@ The branch `master` contains the newest released version. `next` is upcoming and
 ## Dev
  * [ ] Test rfProgram.getUniformObject()
  * [ ] Index buffers in rfGeometry
+ * [ ] Integrate css-pixelated as part of code
 
 # Game project templates
 The directory ```templates``` contains a few templates for starting a new project.

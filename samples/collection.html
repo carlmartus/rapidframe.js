@@ -31,7 +31,8 @@
 
 <div id="buttons">
 <button onclick="sample(mainTriangle)">Hello triangle</button>
-<button onclick="sample(mainBuffer)">Hello triangle</button>
+<button onclick="sample(mainBuffer)">Buffer</button>
+<button onclick="sample(mainOffCanvas)">Off canvas</button>
 </div>
 
 <script>
@@ -45,7 +46,7 @@ function sample(callback) {
 };
 
 function init() {
-	sample(mainBuffer);
+	sample(mainOffCanvas);
 };
 
 var bs = document.getElementsByTagName('button');
@@ -56,6 +57,7 @@ for (var i=0; i<bs.length; i++) {
 
 <script src="hellotriangle.js"></script>
 <script src="buffer.js"></script>
+<script src="offcanvas.js"></script>
 
 <script src="../rapidframe.min.js"></script>
 </body>
