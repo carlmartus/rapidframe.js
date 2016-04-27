@@ -31,6 +31,7 @@ The branch `master` contains the newest released version. `next` is upcoming and
  * [X] Keyboard events
  * [X] Mouse events
  * [X] Documentation
+ * [X] Low level data types storage (rfBuffer)
  * [ ] Mouse event button id
  * [ ] 2D sprite system
  * [ ] 2D font
