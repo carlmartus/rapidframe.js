@@ -10,7 +10,8 @@ is ment to provide functionallity fo a selection of common operations done in
 
 # Documentation
 
-Can be found [here](http://martus.se/rapidframe/doc/).
+Can be found [here](http://martus.se/rapidframe/doc/). The easiest way to learn
+this toolkit is to look at the sample code found in the directory `samples`.
 
 ## Repository branches
 The branch `master` contains the newest released version. `next` is upcoming and

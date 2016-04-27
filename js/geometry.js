@@ -11,31 +11,53 @@ function rfGeometry(rf) {
 };
 
 /**
- * Create new array buffer. ID of buffers will begin at 0 and increment from
+ * Add a GlBuffer to list of buffers.
+ * @return {int} ID of buffer added
+ */
+rfGeometry.prototype.addBuffer = function(buffer) {
+	this.buffers.push(buf);
+	return this.buffers.length-1;
+};
+
+/**
+ * Create new array buffer.
  * there.
  * @param {GlUsage} usage gl.STATIC_DRAW or similar
  * @param {int|ArrayBuffer} arr Content. If integer is given, there will be a
  * mere allocation of data and updateBuffer will have to be used to fill the
  * buffer.
+ * @return {int} ID of buffer created
  */
-rfGeometry.prototype.addBuffer = function(usage, arr) {
+rfGeometry.prototype.createBuffer = function(usage, arr) {
 	var gl = this.gl;
 
 	var buf = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+
 	if (typeof(arr) == 'number') {
 		gl.bufferData(gl.ARRAY_BUFFER, new ArrayBuffer(arr), usage);
 	} else {
 		gl.bufferData(gl.ARRAY_BUFFER, arr, usage);
 	}
 
-	this.buffers.push(buf);
-	return buf;
+	return this.addBuffer(buf);
+};
+
+/**
+ * Replace buffer to be used at given ID.
+ * @param {int} bufferId ID of buffer to be replaced.
+ * @param {GlBuffer} newBuffer New buffer.
+ * @return {GlBuffer} Old buffer.
+ */
+rfGeometry.prototype.setBuffer = function(bufferId, newBuffer) {
+	var oldBuf = this.buffers[bufferId];
+	this.buffers[bufferId] = newBuffer;
+	return oldBuf;
 };
 
 /**
  * Update data in buffer.
- * @param {int} bufferId Buffer ID, first buffer has ID 0, second 1, etc.
+ * @param {int} bufferId ID of buffer to update.
  * @param {int} offset Data will be put att this offset of the target buffer.
  * @param {ArrayBuffer} arr Data to be put in target buffer.
  */
