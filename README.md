@@ -1,6 +1,6 @@
 ![extra](extra/logo.png)
 
-# Rapidframe.js v1.0.0-dev
+# Rapidframe.js v1.1.0-dev
 
 Fast game development using *WebGL* and *Javascript* for modern web browsers.
 
@@ -42,7 +42,6 @@ The branch `master` contains the newest released version. `next` is upcoming and
 ## Dev
  * [ ] Test rfProgram.getUniformObject()
  * [ ] Index buffers in rfGeometry
- * [ ] rfProgram.enumerateAttributes(string[]);
 
 # Game project templates
 The directory ```templates``` contains a few templates for starting a new project.

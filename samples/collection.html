@@ -5,8 +5,7 @@
 <title>Rapidframe samples collection</title>
 </head>
 
-<body onload="sample(mainGeometry)">
-<!--<body>-->
+<body onload="init()">
 
 <canvas style="border: 2px solid #22B;" id="canvas" width="300" height="300"></canvas>
 
@@ -22,6 +21,10 @@ function sample(callback) {
 	}
 
 	callback();
+};
+
+function init() {
+	//mainGeometry();
 };
 
 var bs = document.getElementsByTagName('button');
