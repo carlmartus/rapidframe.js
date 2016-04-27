@@ -24,9 +24,9 @@ rfGeometry.prototype.addBuffer = function(usage, arr) {
 	var buf = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, buf);
 	if (typeof(arr) == 'number') {
-		gl.bufferData(gl.ARRAY_BUFFER, new ArrayBuffer(arr), drawType);
+		gl.bufferData(gl.ARRAY_BUFFER, new ArrayBuffer(arr), usage);
 	} else {
-		gl.bufferData(gl.ARRAY_BUFFER, arr, drawType);
+		gl.bufferData(gl.ARRAY_BUFFER, arr, usage);
 	}
 
 	this.buffers.push(buf);

@@ -9,7 +9,7 @@ void main() {
 	gl_Position = vec4(atLoc, 1);
 }`;
 
-function mainGeometry() {
+function mainTriangle() {
 	var rf = new rfGame('canvas');
 	var gl = rf.setupWebGl({antialias: false});
 
