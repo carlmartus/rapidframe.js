@@ -15,7 +15,7 @@ function rfGeometry(rf) {
  * @return {int} ID of buffer added
  */
 rfGeometry.prototype.addBuffer = function(buffer) {
-	this.buffers.push(buf);
+	this.buffers.push(buffer);
 	return this.buffers.length-1;
 };
 
@@ -107,7 +107,9 @@ rfGeometry.prototype.render = function(primitiveType, vertOffset, vertCount) {
 
 		if (va.bufferId != lastBufId) {
 			gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers[va.bufferId]);
+			lastBufId = va.bufferId;
 		}
+
 		gl.vertexAttribPointer(i, va.elemCount, va.dataType, va.normalize,
 				va.stride, va.offset);
 	}

@@ -3,14 +3,35 @@
 <head>
 <meta charset="utf-8"/>
 <title>Rapidframe samples collection</title>
+<style>
+.pixelated {
+	/* Stackoverflow */
+	image-rendering:optimizeSpeed;             /* Legal fallback */
+	image-rendering:-moz-crisp-edges;          /* Firefox        */
+	image-rendering:-o-crisp-edges;            /* Opera          */
+	image-rendering:-webkit-optimize-contrast; /* Safari         */
+	image-rendering:optimize-contrast;         /* CSS3 Proposed  */
+	image-rendering:crisp-edges;               /* CSS4 Proposed  */
+	image-rendering:pixelated;                 /* CSS4 Proposed  */
+	-ms-interpolation-mode:nearest-neighbor;   /* IE8+           */
+}
+
+#canvas {
+	border: 2px solid #22B;
+	width: 400px;
+	height: 400px;
+}
+</style>
 </head>
 
 <body onload="init()">
 
-<canvas style="border: 2px solid #22B;" id="canvas" width="300" height="300"></canvas>
+<canvas class="pixelated" id="canvas"
+	width="100" height="100"></canvas>
 
 <div id="buttons">
 <button onclick="sample(mainTriangle)">Hello triangle</button>
+<button onclick="sample(mainBuffer)">Hello triangle</button>
 </div>
 
 <script>
@@ -24,7 +45,7 @@ function sample(callback) {
 };
 
 function init() {
-	//mainTriangle();
+	sample(mainBuffer);
 };
 
 var bs = document.getElementsByTagName('button');
@@ -34,6 +55,7 @@ for (var i=0; i<bs.length; i++) {
 </script>
 
 <script src="hellotriangle.js"></script>
+<script src="buffer.js"></script>
 
 <script src="../rapidframe.min.js"></script>
 </body>

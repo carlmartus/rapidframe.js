@@ -40,10 +40,10 @@ rfBuffer.prototype.isFull = function() {
 rfBuffer.prototype.pushInt8		= function(n) { this.buf.setInt8(this.offset, n);	this.offset += 1; };
 
 /**
- * Write UInt 8
+ * Write Uint 8
  * @param {number} n Number
  */
-rfBuffer.prototype.pushUInt8	= function(n) { this.buf.setUInt8(this.offset, n);	this.offset += 1; };
+rfBuffer.prototype.pushUint8	= function(n) { this.buf.setUint8(this.offset, n);	this.offset += 1; };
 
 /**
  * Write Int 16
@@ -52,10 +52,10 @@ rfBuffer.prototype.pushUInt8	= function(n) { this.buf.setUInt8(this.offset, n);	
 rfBuffer.prototype.pushInt16	= function(n) { this.buf.setInt16(this.offset, n);	this.offset += 2; };
 
 /**
- * Write UInt 16
+ * Write Uint 16
  * @param {number} n Number
  */
-rfBuffer.prototype.pushUInt16	= function(n) { this.buf.setUInt16(this.offset, n);	this.offset += 2; };
+rfBuffer.prototype.pushUint16	= function(n) { this.buf.setUint16(this.offset, n);	this.offset += 2; };
 
 /**
  * Write Int 32
@@ -64,10 +64,10 @@ rfBuffer.prototype.pushUInt16	= function(n) { this.buf.setUInt16(this.offset, n)
 rfBuffer.prototype.pushInt32	= function(n) { this.buf.setInt32(this.offset, n);	this.offset += 4; };
 
 /**
- * Write UInt 32
+ * Write Uint 32
  * @param {number} n Number
  */
-rfBuffer.prototype.pushUInt32	= function(n) { this.buf.setUInt32(this.offset, n);	this.offset += 4; };
+rfBuffer.prototype.pushUint32	= function(n) { this.buf.setUint32(this.offset, n);	this.offset += 4; };
 
 /**
  * Write Float 32
@@ -96,9 +96,10 @@ rfBuffer.prototype.getDataView = function() {
  * @param {GlUsage} usage gl.STATIC_DRAW or similar.
  * @return {GlBuffer} gl.ARRAY_BUFFER object.
  */
-rfBuffer.prototype.createGlArray = function(gl, usage) {
+rfBuffer.prototype.createGlArrayBuffer = function(gl, usage) {
 	var va = gl.createBuffer();
 	gl.bindBuffer(gl.ARRAY_BUFFER, va);
 	gl.bufferData(gl.ARRAY_BUFFER, this.buf, usage);
+	return va;
 };
 

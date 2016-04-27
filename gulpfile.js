@@ -6,7 +6,7 @@ gulp.task('js', function() {
 	return gulp.src(['js/*.js', 'gen/*.js'])
 		//.pipe(concat('rapidframe.js'))
 		.pipe(concat('rapidframe.min.js'))
-		.pipe(uglify())
+		//.pipe(uglify())
 		.pipe(gulp.dest('.'));
 });
 
