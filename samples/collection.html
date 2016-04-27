@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Rapidframe samples collection</title>
+</head>
+
+<body onload="init()">
+
+<canvas style="border: 2px solid #22B;" id="canvas" width="300" height="300"></canvas>
+
+<div id="buttons">
+<button onclick="sample(mainTriangle)">Hello triangle</button>
+</div>
+
+<script>
+function sample(callback) {
+	var bs = document.getElementsByTagName('button');
+	for (var i=0; i<bs.length; i++) {
+		bs[i].disabled = true;
+	}
+
+	callback();
+};
+
+function init() {
+	//mainTriangle();
+};
+
+var bs = document.getElementsByTagName('button');
+for (var i=0; i<bs.length; i++) {
+	bs[i].disabled = false;
+}
+</script>
+
+<script src="hellotriangle.js"></script>
+
+<script src="../rapidframe.min.js"></script>
+</body>
+</html>
+
