@@ -29,7 +29,10 @@ rfLoader.prototype.loadImage = function(url) {
 /**
  * Queue Image download. When the file is downloaded it will be converted to a
  * OpenGL texture.
+ * @param {GlContext} gl
  * @param {string} url Image URL
+ * @param filterMin Minification filter (eg. gl.NEAREST).
+ * @param filterMag Magnification filter (eg. gl.LINEAR).
  * @return {GlTexture}
  */
 rfLoader.prototype.loadTexture = function(gl, url, filterMag, filterMin) {

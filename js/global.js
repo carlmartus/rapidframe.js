@@ -15,6 +15,14 @@ function rfCanvas_makeOffscreen(width, height) {
 	return can.getContext('2d');
 };
 
+/**
+ * Create a new WebGL texture from a HTML5 2D canvas.
+ * @param {GlContext} gl
+ * @param {HTML5Canvas}
+ * @param filterMin Minification filter (eg. gl.NEAREST).
+ * @param filterMag Magnification filter (eg. gl.LINEAR).
+ * @param {boolean} mipmap Generate mipmaps?
+ */
 function rfCanvas_canvas2GlTexture(gl, can, filterMag, filterMin, mipmap) {
 	var tex = gl.createTexture();
 
@@ -26,5 +34,15 @@ function rfCanvas_canvas2GlTexture(gl, can, filterMag, filterMin, mipmap) {
 	if (mipmap) {
 		gl.generateMipmap(gl.TEXTURE_2D);
 	}
+
+	return tex;
+};
+
+/**
+ * Set WebGL default vertical flip of textures.
+ * @param {boolean} on
+ */
+function rfGl_textureFlipY(on) {
+	this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, on);
 };
 

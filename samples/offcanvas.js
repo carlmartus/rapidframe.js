@@ -11,7 +11,7 @@ var ocShFrag = `
 varying vec2 vaUv;
 uniform sampler2D unTex0;
 void main() {
-	gl_FragColor = texture2D(unTex0, vaUv) + vec4(vaUv, 0, 1);;
+	gl_FragColor = texture2D(unTex0, vaUv);
 }`;
 
 function mainOffCanvas() {
@@ -42,15 +42,19 @@ function mainOffCanvas() {
 	geo.addVertexAttrib(0, 2, gl.UNSIGNED_BYTE, false, 4, 2);
 
 	// Texture
-	var oc = rfCanvas_makeOffscreen(64, 64);
+	var oc = rfCanvas_makeOffscreen(32, 32);
 
+	// Draw something
 	oc.fillStyle = "red";
-	oc.fillRect(2, 2, 60, 60);
-	var texture = rfCanvas_canvas2GlTexture(gl, oc,
-			gl.NEAREST, gl.NEAREST, false);
+	oc.fillText('HELLO', 8, 8);
+	oc.fillRect(0, 16, 32, 16);
 
-	pr.use();
+	var texture = rfCanvas_canvas2GlTexture(gl, oc,
+			gl.NEAREST, gl.NEAREST, true);
+	console.log('Gl Texture', texture);
+
 	gl.bindTexture(gl.TEXTURE_2D, texture);
+	pr.use();
 
 	geo.render(gl.TRIANGLES, 0, 6);
 };
