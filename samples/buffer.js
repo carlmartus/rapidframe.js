@@ -4,7 +4,7 @@ attribute vec4 atCol;
 varying vec4 vaCol;
 void main() {
 	//vaCol = atCol;
-	vaCol = vec4(atLoc, 0, 1) + atCol;
+	vaCol = atCol;
 	gl_Position = vec4(atLoc, 0, 1);
 }`
 
@@ -35,16 +35,11 @@ function mainBuffer() {
 		bu.pushUint8(a);
 	};
 
-	var tmpBuf = new Float32Array(bu.buf.buffer);
-	for (var i=0; i<8; i++) {
-		console.log(i + ' = ' + tmpBuf[i]);
-	};
-
 	// Vertex data
-	pushVert(bu, -0.9, -0.8, 255, 0, 0);
-	pushVert(bu,  0.7, -0.9, 0, 255, 0);
-	pushVert(bu, -0.5,  0.95, 0, 0, 255);
-	pushVert(bu,  0.9,  0.9, 255, 0, 255);
+	pushVert(bu, -0.9, -0.8, 255, 0, 0, 255);
+	pushVert(bu,  0.7, -0.9, 0, 255, 0, 255);
+	pushVert(bu, -0.5,  0.95, 0, 0, 255, 255);
+	pushVert(bu,  0.9,  0.9, 255, 0, 255, 255);
 
 	// Geometry
 	var geo = new rfGeometry(rf);

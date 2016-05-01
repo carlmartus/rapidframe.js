@@ -83,7 +83,7 @@ rfGeometry.prototype.addVertexAttrib = function(bufferId, elemCount, dataType,
 		bufferId: bufferId,
 		elemCount: elemCount,
 		dataType: dataType,
-		normalize: normalize ? this.gl.TRUE : this.gl.FALSE,
+		normalize: normalize,
 		stride: stride,
 		offset: offset,
 	};
