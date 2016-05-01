@@ -40,9 +40,10 @@ function rfCanvas_canvas2GlTexture(gl, can, filterMag, filterMin, mipmap) {
 
 /**
  * Set WebGL default vertical flip of textures.
+ * @param {GlContext}
  * @param {boolean} on
  */
-function rfGl_textureFlipY(on) {
-	this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, on);
+function rfGl_textureFlipY(gl, on) {
+	gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, on);
 };
 

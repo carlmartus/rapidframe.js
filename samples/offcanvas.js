@@ -18,6 +18,7 @@ function mainOffCanvas() {
 	var rf = new rfGame('canvas');
 	var gl = rf.setupWebGl({antialias: false});
 
+	rfGl_textureFlipY(gl, true);
 	gl.clear(gl.COLOR_BUFFER_BIT);
 
 	// Shader
@@ -42,12 +43,14 @@ function mainOffCanvas() {
 	geo.addVertexAttrib(0, 2, gl.UNSIGNED_BYTE, false, 4, 2);
 
 	// Texture
-	var oc = rfCanvas_makeOffscreen(32, 32);
+	var oc = rfCanvas_makeOffscreen(64, 64);
 
 	// Draw something
+	oc.fillStyle = "blue";
+	oc.font = "13px arial";
+	oc.fillText('HELLO', 0, 16);
 	oc.fillStyle = "red";
-	oc.fillText('HELLO', 8, 8);
-	oc.fillRect(0, 16, 32, 16);
+	oc.fillRect(0, 32, 64, 32);
 
 	var texture = rfCanvas_canvas2GlTexture(gl, oc,
 			gl.NEAREST, gl.NEAREST, true);

@@ -3,7 +3,6 @@ attribute vec2 atLoc;
 attribute vec4 atCol;
 varying vec4 vaCol;
 void main() {
-	//vaCol = atCol;
 	vaCol = atCol;
 	gl_Position = vec4(atLoc, 0, 1);
 }`
@@ -12,7 +11,6 @@ var bufShFrag = `
 varying vec4 vaCol;
 void main() {
 	gl_FragColor = vaCol;
-	//gl_FragColor = vec4(1, 0, 0, 1);
 }`
 
 function mainBuffer() {
@@ -20,11 +18,10 @@ function mainBuffer() {
 	var gl = rf.setupWebGl({antialias: false});
 	gl.clear(gl.COLOR_BUFFER_BIT);
 
-	// Each vertex is 13 bytes
-	//var bu = new rfBuffer(12*4);
-	//var bu = new rfBuffer(8*4);
-	var bu = new rfBuffer(200);
+	// Create buffer that will contain vertex data
+	var bu = new rfBuffer(12*4);
 
+	// Push a custom vertex by packing data
 	function pushVert(bu, x, y, r, g, b, a) {
 		bu.pushFloat32(x);
 		bu.pushFloat32(y);
@@ -35,7 +32,7 @@ function mainBuffer() {
 		bu.pushUint8(a);
 	};
 
-	// Vertex data
+	// Add vertices
 	pushVert(bu, -0.9, -0.8, 255, 0, 0, 255);
 	pushVert(bu,  0.7, -0.9, 0, 255, 0, 255);
 	pushVert(bu, -0.5,  0.95, 0, 0, 255, 255);
@@ -45,14 +42,6 @@ function mainBuffer() {
 	var geo = new rfGeometry(rf);
 	var va = bu.createGlArrayBuffer(gl, gl.STATIC_DRAW);
 	geo.addBuffer(va);
-	//geo.createBuffer(gl.STATIC_DRAW, bu.buf.buffer);
-	/*
-	geo.createBuffer(gl.STATIC_DRAW, new Float32Array([
-				0, 0,
-				1, 0,
-				0, 1,
-				1, 1,]));*/
-	//geo.addVertexAttrib(0, 2, gl.FLOAT, false, 0, 0);
 	geo.addVertexAttrib(0, 2, gl.FLOAT, false, 12, 0);
 	geo.addVertexAttrib(0, 4, gl.UNSIGNED_BYTE, true, 12, 8);
 
@@ -60,7 +49,6 @@ function mainBuffer() {
 	var pr = new rfProgram(gl);
 	pr.addShaderTextDual(bufShVert, bufShFrag, pr.MEDIUMP);
 	pr.enumerateAttributes(['atLoc', 'atCol']);
-	//pr.enumerateAttributes(['atLoc']);
 	pr.link();
 
 	pr.use();
