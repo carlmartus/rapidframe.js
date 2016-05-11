@@ -9,8 +9,9 @@ function rfLoader() {
 }
 
 rfLoader.prototype.LOAD_IMAGE = 1;
-rfLoader.prototype.LOAD_AUDIO = 2;
-rfLoader.prototype.LOAD_TEXTURE = 3;
+rfLoader.prototype.LOAD_AUDIO_HTML = 2;
+rfLoader.prototype.LOAD_AUDIO_BUFFER = 3;
+rfLoader.prototype.LOAD_TEXTURE = 4;
 
 rfLoader.prototype.GLLOD_BG = 16;
 rfLoader.prototype.GLLOD_FG = 12;
@@ -55,9 +56,35 @@ rfLoader.prototype.loadTexture = function(gl, url, filterMag, filterMin) {
  */
 rfLoader.prototype.loadAudio = function(url) {
 	var obj = new Audio();
-	this.list.push([obj, url, this.LOAD_AUDIO]);
+	this.list.push([obj, url, this.LOAD_AUDIO_HTML]);
 	return obj;
 }
+
+rfLoader.prototype.loadAudioBuffer = function(rfwa, url) {
+	var req = new XMLHttpRequest();
+
+	var obj = {
+		request: req,
+		buffer: null,
+		doneCallback: null,
+	};
+
+	this.list.push([obj, url, this.LOAD_AUDIO_BUFFER]);
+
+	req.open('GET', url, true);
+	req.responseType = 'arraybuffer';
+	req.onload = function() {
+		var audioData = req.response;
+
+		rfwa.context.decodeAudioData(audioData, function(buffer) {
+			obj.buffer = buffer;
+
+			obj.doneCallback();
+		});
+	};
+
+	return obj;
+};
 
 function renderGlLoadingScreen(gl, step, count) {
 	var dims = gl.getParameter(gl.VIEWPORT);
@@ -163,9 +190,14 @@ rfLoader.prototype.download = function(callback, step, gl) {
 				obj.src = listUrl;
 				break;
 
-			case this.LOAD_AUDIO :
+			case this.LOAD_AUDIO_HTML :
 				obj.addEventListener('canplaythrough', func, false);
 				obj.src = listUrl;
+				break;
+
+			case this.LOAD_AUDIO_BUFFER :
+				obj.doneCallback = func;
+				obj.request.send();
 				break;
 
 			case this.LOAD_TEXTURE :
