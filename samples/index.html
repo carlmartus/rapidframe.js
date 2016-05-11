@@ -26,6 +26,8 @@
 
 <body onload="init()">
 
+<p>Scaleup 2X. Bring up browser console with F12.</p>
+
 <canvas class="pixelated" id="canvas"
 	width="200" height="200"></canvas>
 
@@ -33,11 +35,17 @@
 <button onclick="sample(mainTriangle)">Hello triangle</button>
 <button onclick="sample(mainBuffer)">Buffer</button>
 <button onclick="sample(mainOffCanvas)">Off canvas</button>
+<button onclick="sample(mainWebAudio)">WebAudio</button>
+</div>
+
+<div>
+<button onclick="window.location.reload(false);">Reload page</button>
 </div>
 
 <script>
 function sample(callback) {
-	var bs = document.getElementsByTagName('button');
+	var divBs = document.getElementById('buttons');
+	var bs = divBs.getElementsByTagName('button');
 	for (var i=0; i<bs.length; i++) {
 		bs[i].disabled = true;
 	}
@@ -46,7 +54,7 @@ function sample(callback) {
 };
 
 function init() {
-	//sample(mainBuffer);
+	//sample(mainWebAudio);
 };
 
 var bs = document.getElementsByTagName('button');
@@ -58,6 +66,7 @@ for (var i=0; i<bs.length; i++) {
 <script src="hellotriangle.js"></script>
 <script src="buffer.js"></script>
 <script src="offcanvas.js"></script>
+<script src="webaudio.js"></script>
 
 <script src="../rapidframe.min.js"></script>
 </body>

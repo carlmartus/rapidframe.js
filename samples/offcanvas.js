@@ -54,7 +54,6 @@ function mainOffCanvas() {
 
 	var texture = rfCanvas_canvas2GlTexture(gl, oc,
 			gl.NEAREST, gl.NEAREST, true);
-	console.log('Gl Texture', texture);
 
 	gl.bindTexture(gl.TEXTURE_2D, texture);
 	pr.use();

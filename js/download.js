@@ -130,7 +130,7 @@ function createTextureDownload(callback, obj, img) {
 /**
  * Async callback for downloads.
  * @param {downloadsCompleted} callback When downloads are completed
- * @param {downloadsStep} step When one of the downloads are completed
+ * @param {downloadsStep} [step] When one of the downloads are completed
  * @param {GlContext} [gl]
  */
 rfLoader.prototype.download = function(callback, step, gl) {
