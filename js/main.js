@@ -93,8 +93,8 @@ rfGame.prototype.setupWebGl = function(webGlOptions) {
 
 /**
  * Create a async game loop.
- * @param {frame} Callback for each frame in game loop.
- * @param {render} Callback for each render in game loop. Will not be called if
+ * @param {frame} frame Callback for each frame in game loop.
+ * @param {render} [render] Callback for each render in game loop. Will not be called if
  * area is not being dislayed.
  */
 rfGame.prototype.startLoop = function(frame, render) {
@@ -113,7 +113,7 @@ rfGame.prototype.startLoop = function(frame, render) {
 	function clo() {
 		var now = Date.now();
 		if (frame((now - lastTime) * 0.001, !self.blockRender)) {
-			if (!self.blockRender) render();
+			if (!self.blockRender && render) render();
 			requestAnimationFrame(clo);
 		}
 		lastTime = now;

@@ -94,11 +94,11 @@ function rfVec2_isZero(v) {
 }
 
 /**
- * Create normalized vector.
+ * Normalized vector. Source and destination can be the same.
  * @memberof rfVec2
  * @param {rfVec2} out Result destination
  * @param {rfVec2} v Vector
- * @param {float} len Length of normalized vector
+ * @param {float} [len] Length of normalized vector
  */
 function rfVec3_normalize(out, v, len) {
 	var inv = 1.0 / rfVec2_length(v);
@@ -304,6 +304,19 @@ function rfMat4_mul(out, m0, m1) {
 	out[13] = m1[12]*m0[ 1] + m1[13]*m0[ 5] + m1[14]*m0[ 9] + m1[15]*m0[13];
 	out[14] = m1[12]*m0[ 2] + m1[13]*m0[ 6] + m1[14]*m0[10] + m1[15]*m0[14];
 	out[15] = m1[12]*m0[ 3] + m1[13]*m0[ 7] + m1[14]*m0[11] + m1[15]*m0[15];
+}
+
+/**
+ * Multiplication between matrix and 3D vector.
+ * @memberof rfMat4
+ * @param {rfVec3} out Vector destination
+ * @param {rfMat4} m
+ * @param {rfVec3} v
+ */
+function rfMat4_mulVec3(out, m, v) {
+	out[0] = m[ 0]*v[0] +  m[ 1]*v[1] +  m[ 2]*v[2] +  m[ 3];
+	out[1] = m[ 4]*v[0] +  m[ 5]*v[1] +  m[ 6]*v[2] +  m[ 7];
+	out[2] = m[ 8]*v[0] +  m[ 9]*v[1] +  m[10]*v[2] +  m[11];
 }
 
 /**
