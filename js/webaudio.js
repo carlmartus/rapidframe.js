@@ -37,9 +37,9 @@ rfWebAudio.prototype.setListenPosition = function(
 	this.mat[ 0] = this.vecSide[0];
 	this.mat[ 4] = this.vecSide[1];
 	this.mat[ 8] = this.vecSide[2];
-	this.mat[ 1] = this.vecForward[0];
-	this.mat[ 5] = this.vecForward[1];
-	this.mat[ 9] = this.vecForward[2];
+	this.mat[ 1] = -this.vecForward[0];
+	this.mat[ 5] = -this.vecForward[1];
+	this.mat[ 9] = -this.vecForward[2];
 	this.mat[ 2] = this.vecUp[0];
 	this.mat[ 6] = this.vecUp[1];
 	this.mat[10] = this.vecUp[2];
@@ -176,9 +176,9 @@ rfAudioPlay.prototype.applyPosition = function() {
 
 	//console.log('Set relative position', this.relativePosition);
 	this.panner.setPosition(
-			this.relativePosition[0],
-			this.relativePosition[1],
-			this.relativePosition[2]);
+			-this.relativePosition[0],
+			-this.relativePosition[1],
+			-this.relativePosition[2]);
 };
 
 rfAudioPlay.prototype.tickUnplay = function() {

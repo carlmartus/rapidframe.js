@@ -79,6 +79,14 @@ rfGame.prototype.setupWebGl = function(webGlOptions) {
 };
 
 /**
+ * Create a canvas 2D instance.
+ * @return {Canvas2dContext}
+ */
+rfGame.prototype.setup2d = function() {
+	return this.tag.getContext('2d');
+};
+
+/**
  * Frame callback for gameloop.
  * @callback frame
  * @param {float} ft Seconds passed since last loop.
