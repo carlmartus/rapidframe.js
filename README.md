@@ -1,6 +1,6 @@
 ![extra](extra/logo.png)
 
-# Rapidframe.js v1.1.0
+# Rapidframe.js v1.2.0
 
 Fast game development using *WebGL* and *Javascript* for modern web browsers.
 
@@ -10,7 +10,8 @@ is ment to provide functionallity fo a selection of common operations done in
 
 # Documentation
 
-Can be found [here](http://martus.se/rapidframe/doc/).
+Can be found [here](http://martus.se/rapidframe/doc/). The easiest way to learn
+this toolkit is to look at the sample code found in the directory `samples`.
 
 ## Repository branches
 The branch `master` contains the newest released version. `next` is upcoming and
@@ -30,15 +31,19 @@ The branch `master` contains the newest released version. `next` is upcoming and
  * [X] Keyboard events
  * [X] Mouse events
  * [X] Documentation
- * [ ] Mouse event button id
- * [ ] 2D sprite system
- * [ ] 2D font
+ * [X] Low level data types storage (rfBuffer)
+ * [X] 3D sound fx using WebAudio
+ * [ ] 2D font generation
  * [ ] On screen button binds for phones
- * [ ] Sounds with HTML5 stereo effect and volume
  * [ ] Tiles collisios detection
- * [ ] Looped ambient sounds
- * [ ] Pixel scale up factor for canvas
+ * [ ] Pixel scale up factor for canvas from javascript
+
+## Dev
+ * [ ] Test rfProgram.getUniformObject()
+ * [ ] Index buffers in rfGeometry
+ * [ ] Integrate css-pixelated as part of code
+ * [ ] Mouse event button id
 
 # Game project templates
-The directory ```templates``` contains a few templates for starting a new project.
+The directory ```templates``` contains a template for starting a new project.
 

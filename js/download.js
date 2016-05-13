@@ -9,8 +9,9 @@ function rfLoader() {
 }
 
 rfLoader.prototype.LOAD_IMAGE = 1;
-rfLoader.prototype.LOAD_AUDIO = 2;
-rfLoader.prototype.LOAD_TEXTURE = 3;
+rfLoader.prototype.LOAD_AUDIO_HTML = 2;
+rfLoader.prototype.LOAD_AUDIO_BUFFER = 3;
+rfLoader.prototype.LOAD_TEXTURE = 4;
 
 rfLoader.prototype.GLLOD_BG = 16;
 rfLoader.prototype.GLLOD_FG = 12;
@@ -29,7 +30,10 @@ rfLoader.prototype.loadImage = function(url) {
 /**
  * Queue Image download. When the file is downloaded it will be converted to a
  * OpenGL texture.
+ * @param {GlContext} gl
  * @param {string} url Image URL
+ * @param filterMin Minification filter (eg. gl.NEAREST).
+ * @param filterMag Magnification filter (eg. gl.LINEAR).
  * @return {GlTexture}
  */
 rfLoader.prototype.loadTexture = function(gl, url, filterMag, filterMin) {
@@ -46,15 +50,47 @@ rfLoader.prototype.loadTexture = function(gl, url, filterMag, filterMin) {
 }
 
 /**
- * Queue Audio clip download.
- * @param {string} url Image URL
+ * Queue audio clip download.
+ * @param {string} url Image URL.
  * @return {Audio}
  */
 rfLoader.prototype.loadAudio = function(url) {
 	var obj = new Audio();
-	this.list.push([obj, url, this.LOAD_AUDIO]);
+	this.list.push([obj, url, this.LOAD_AUDIO_HTML]);
 	return obj;
 }
+
+/**
+ * Queue audio buffer download.
+ * @param {rfWebAudio} rfwa Context to use this sound in.
+ * @param {string} url Sound file URL.
+ * @return {SoundBuffer}
+ */
+rfLoader.prototype.loadAudioBuffer = function(rfwa, url) {
+	var req = new XMLHttpRequest();
+
+	var obj = {
+		request: req,
+		buffer: null,
+		doneCallback: null,
+	};
+
+	this.list.push([obj, url, this.LOAD_AUDIO_BUFFER]);
+
+	req.open('GET', url, true);
+	req.responseType = 'arraybuffer';
+	req.onload = function() {
+		var audioData = req.response;
+
+		rfwa.context.decodeAudioData(audioData, function(buffer) {
+			obj.buffer = buffer;
+
+			obj.doneCallback();
+		});
+	};
+
+	return obj;
+};
 
 function renderGlLoadingScreen(gl, step, count) {
 	var dims = gl.getParameter(gl.VIEWPORT);
@@ -127,7 +163,7 @@ function createTextureDownload(callback, obj, img) {
 /**
  * Async callback for downloads.
  * @param {downloadsCompleted} callback When downloads are completed
- * @param {downloadsStep} step When one of the downloads are completed
+ * @param {downloadsStep} [step] When one of the downloads are completed
  * @param {GlContext} [gl]
  */
 rfLoader.prototype.download = function(callback, step, gl) {
@@ -160,9 +196,14 @@ rfLoader.prototype.download = function(callback, step, gl) {
 				obj.src = listUrl;
 				break;
 
-			case this.LOAD_AUDIO :
+			case this.LOAD_AUDIO_HTML :
 				obj.addEventListener('canplaythrough', func, false);
 				obj.src = listUrl;
+				break;
+
+			case this.LOAD_AUDIO_BUFFER :
+				obj.doneCallback = func;
+				obj.request.send();
 				break;
 
 			case this.LOAD_TEXTURE :

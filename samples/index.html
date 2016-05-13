@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Rapidframe samples collection</title>
+<style>
+.pixelated {
+	/* Stackoverflow */
+	image-rendering:optimizeSpeed;             /* Legal fallback */
+	image-rendering:-moz-crisp-edges;          /* Firefox        */
+	image-rendering:-o-crisp-edges;            /* Opera          */
+	image-rendering:-webkit-optimize-contrast; /* Safari         */
+	image-rendering:optimize-contrast;         /* CSS3 Proposed  */
+	image-rendering:crisp-edges;               /* CSS4 Proposed  */
+	image-rendering:pixelated;                 /* CSS4 Proposed  */
+	-ms-interpolation-mode:nearest-neighbor;   /* IE8+           */
+}
+
+#canvas {
+	border: 2px solid #22B;
+	width: 400px;
+	height: 400px;
+}
+</style>
+</head>
+
+<body onload="init()">
+
+<p>Scaleup 2X. Bring up browser console with F12.</p>
+
+<canvas class="pixelated" id="canvas"
+	width="200" height="200"></canvas>
+
+<div id="buttons">
+<button onclick="sample(mainTriangle)">Hello triangle</button>
+<button onclick="sample(mainBuffer)">Buffer</button>
+<button onclick="sample(mainOffCanvas)">Off canvas</button>
+<button onclick="sample(mainWebAudio)">WebAudio</button>
+</div>
+
+<div>
+<button onclick="window.location.reload(false);">Reload page</button>
+</div>
+
+<script>
+function sample(callback) {
+	var divBs = document.getElementById('buttons');
+	var bs = divBs.getElementsByTagName('button');
+	for (var i=0; i<bs.length; i++) {
+		bs[i].disabled = true;
+	}
+
+	callback();
+};
+
+function init() {
+	//sample(mainWebAudio);
+};
+
+var bs = document.getElementsByTagName('button');
+for (var i=0; i<bs.length; i++) {
+	bs[i].disabled = false;
+}
+</script>
+
+<script src="hellotriangle.js"></script>
+<script src="buffer.js"></script>
+<script src="offcanvas.js"></script>
+<script src="webaudio.js"></script>
+
+<script src="../rapidframe.min.js"></script>
+</body>
+</html>
+
