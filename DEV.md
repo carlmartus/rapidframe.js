@@ -7,4 +7,5 @@
 # Public
  * martus.se/rapidframe/rapidframe.js
  * martus.se/rapidframe/doc
+ * martus.se/rapidframe/samples
 

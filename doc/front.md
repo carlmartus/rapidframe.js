@@ -11,5 +11,6 @@ OpenGL
 ## Resources
  * [Github repository](https://github.com/carlmartus/rapidframe.js)
  * [Documentation](http://martus.se/rapidframe/doc)
- * [Samples](https://github.com/carlmartus/rapidframe.js/tree/master/samples)
+ * [Samples (Browser demos)](http://martus.se/rapidframe/samples/)
+ * [Samples (Source)](https://github.com/carlmartus/rapidframe.js/tree/master/samples)
 
