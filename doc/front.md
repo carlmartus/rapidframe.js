@@ -1,5 +1,7 @@
 ![Logo](logo.png)
 
+Rapidframe v1.2.0.
+
 Fast game development using WebGL and Javascript for modern web browsers.
 
 To use this library you need to have a understanding of OpenGL, this libraray is
