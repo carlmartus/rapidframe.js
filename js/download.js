@@ -50,8 +50,8 @@ rfLoader.prototype.loadTexture = function(gl, url, filterMag, filterMin) {
 }
 
 /**
- * Queue Audio clip download.
- * @param {string} url Image URL
+ * Queue audio clip download.
+ * @param {string} url Image URL.
  * @return {Audio}
  */
 rfLoader.prototype.loadAudio = function(url) {
@@ -60,6 +60,12 @@ rfLoader.prototype.loadAudio = function(url) {
 	return obj;
 }
 
+/**
+ * Queue audio buffer download.
+ * @param {rfWebAudio} rfwa Context to use this sound in.
+ * @param {string} url Sound file URL.
+ * @return {SoundBuffer}
+ */
 rfLoader.prototype.loadAudioBuffer = function(rfwa, url) {
 	var req = new XMLHttpRequest();
 

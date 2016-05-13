@@ -1,11 +1,11 @@
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var uglify = require('gulp-uglify');
+//var uglify = require('gulp-uglify');
 
 gulp.task('js', function() {
-	return gulp.src(['js/*.js', 'gen/*.js'])
-		//.pipe(concat('rapidframe.js'))
-		.pipe(concat('rapidframe.min.js'))
+	return gulp.src(['extra/header.js', 'js/*.js', 'gen/*.js'])
+		.pipe(concat('rapidframe.js'))
+		//.pipe(concat('rapidframe.min.js'))
 		//.pipe(uglify())
 		.pipe(gulp.dest('.'));
 });

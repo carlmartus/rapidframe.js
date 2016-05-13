@@ -2,6 +2,11 @@
 // Web audio container
 //=============================================================================
 
+/**
+ * @class
+ * @classdesc 3D sound fx base system using WebAudio.
+ * @param {int} channelCount Maximum amount of different sounds.
+ */
 function rfWebAudio(channelCount) {
 	this.vecForward = rfVec3_create();
 	this.vecSide = rfVec3_create();
@@ -15,6 +20,20 @@ function rfWebAudio(channelCount) {
 	for (let i=0; i<channelCount; i++) this.channels.push(null);
 };
 
+/**
+ * Set listening position.
+ * @param {float} x Absolute X position.
+ * @param {float} y Absolute Y position.
+ * @param {float} z Absolute Z position.
+ * @param {float} dx Relative looking X direction.
+ * @param {float} dy Relative looking Y direction.
+ * @param {float} dz Relative looking Z direction.
+ * @param {float} ux Relative upward X direction.
+ * @param {float} uy Relative upward Y direction.
+ * @param {float} uz Relative upward Z direction.
+ * @param {boolean} normalize Should be true if the directions are not
+ * normalized.
+ */
 rfWebAudio.prototype.setListenPosition = function(
 		x, y, z,
 		dx, dy, dz,
@@ -55,10 +74,22 @@ rfWebAudio.prototype.setListenPosition = function(
 	}
 };
 
+/**
+ * Setup a channel as mono sound playback.
+ * @param {int} id Channel ID.
+ * @param {SoundBuffer} sound Sound buffer. From rfLoader.
+ * @param {int} maxChannels Maximum simultanious playing sound of this clip.
+ */
 rfWebAudio.prototype.setChannelMono = function(id, sound, maxChannels) {
 	this.setChannel(id, sound.buffer, false, maxChannels);
 };
 
+/**
+ * Setup a channel as 3D sound playback.
+ * @param {int} id Channel ID.
+ * @param {SoundBuffer} sound Sound buffer. From rfLoader.
+ * @param {int} maxChannels Maximum simultanious playing sound of this clip.
+ */
 rfWebAudio.prototype.setChannel3d = function(id, sound, maxChannels) {
 	this.setChannel(id, sound.buffer, true, maxChannels);
 };
@@ -68,20 +99,40 @@ rfWebAudio.prototype.setChannel = function(id, buffer, usePanner, maxChannels) {
 			buffer, usePanner, maxChannels);
 };
 
+/**
+ * Stop all sounds on channel.
+ * @param {int} id Channel ID.
+ */
 rfWebAudio.prototype.stopChannel = function(id) {
 	this.channels[id].stopAll();
 };
 
+/**
+ * Stop all sounds on all channels.
+ */
 rfWebAudio.prototype.stopAll = function() {
 	for (let i=0; i<this.channels.length; i++) {
 		this.stopChannel(i);
 	}
 };
 
+/**
+ * Play a sound on a mono channel.
+ * @param {int} id Channel ID.
+ * @param {boolean} loop Loop sound?
+ */
 rfWebAudio.prototype.playMono = function(id, loop) {
 	this.channels[id].playNext(0, 0, 0, loop);
 };
 
+/**
+ * Play a sound on a 3D channel.
+ * @param {int} id Channel ID.
+ * @param {float} x Sound origin absolute X position.
+ * @param {float} y Sound origin absolute Y position.
+ * @param {float} z Sound origin absolute Z position.
+ * @param {boolean} loop Loop sound?
+ */
 rfWebAudio.prototype.play3d = function(id, x, y, z, loop) {
 	let chans = this.channels[id];
 	let play = chans.playNext(x, y, z, loop);
