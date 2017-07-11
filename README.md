@@ -1,6 +1,6 @@
 ![extra](extra/logo.png)
 
-# Rapidframe.js v1.2.0
+# Rapidframe.js v1.3.0
 
 Fast game development using *WebGL* and *Javascript* for modern web browsers.
 

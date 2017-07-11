@@ -7,8 +7,5 @@
 # Public
  * martus.se/rapidframe/rapidframe.js
  * martus.se/rapidframe/doc
-<<<<<<< HEAD
-=======
  * martus.se/rapidframe/samples
->>>>>>> dev
 

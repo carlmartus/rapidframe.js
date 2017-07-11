@@ -103,3 +103,9 @@ rfBuffer.prototype.createGlArrayBuffer = function(gl, usage) {
 	return va;
 };
 
+rfBuffer.prototype.updateGlArrayBuffer = function(gl, va) {
+	gl.bindBuffer(gl.ARRAY_BUFFER, va);
+	gl.bufferSubData(gl.ARRAY_BUFFER, 0,
+		this.buf.buffer.slice(0, this.offset));
+};
+
