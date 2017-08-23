@@ -63,7 +63,7 @@ rfGeometry.prototype.setBuffer = function(bufferId, newBuffer) {
  */
 rfGeometry.prototype.updateBuffer = function(bufferId, offset, arr) {
 	var gl = this.gl;
-	gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+	gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers[bufferId]);
 	gl.bufferSubData(gl.ARRAY_BUFFER, offset, arr);
 };
 

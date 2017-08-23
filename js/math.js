@@ -27,6 +27,15 @@ function rfVec2_parse(x, y) {
 }
 
 /**
+ * Set each component.
+ * @memberof rfVec2
+ */
+function rfVec2_set(out, x, y) {
+	out[0] = x;
+	out[1] = y;
+}
+
+/**
  * 2D component wise addition.
  * @memberof rfVec2
  * @param {rfVec2} out Result destination
@@ -100,13 +109,22 @@ function rfVec2_isZero(v) {
  * @param {rfVec2} v Vector
  * @param {float} [len] Length of normalized vector
  */
-function rfVec3_normalize(out, v, len) {
+function rfVec2_normalize(out, v, len) {
 	var inv = 1.0 / rfVec2_length(v);
 	if (len) inv *= len;
 	out[0] = inv*v[0];
 	out[1] = inv*v[1];
 }
 
+/**
+ * Set each component.
+ * @memberof rfVec3
+ */
+function rfVec3_set(out, x, y, z) {
+	out[0] = x;
+	out[1] = y;
+	out[2] = z;
+}
 
 // Vector 3 components
 // ===================

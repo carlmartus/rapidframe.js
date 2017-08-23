@@ -103,8 +103,8 @@ rfBuffer.prototype.createGlArrayBuffer = function(gl, usage) {
 	return va;
 };
 
-rfBuffer.prototype.updateGlArrayBuffer = function(gl, va) {
-	gl.bindBuffer(gl.ARRAY_BUFFER, va);
+rfBuffer.prototype.updateGeometry = function(gl, geo, bufferId) {
+	gl.bindBuffer(gl.ARRAY_BUFFER, geo.buffers[bufferId]);
 	gl.bufferSubData(gl.ARRAY_BUFFER, 0,
 		this.buf.buffer.slice(0, this.offset));
 };
