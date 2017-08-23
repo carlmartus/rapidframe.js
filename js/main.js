@@ -218,14 +218,9 @@ rfGame.prototype.enableFullFrame = function() {
  * @param event DOM event
  */
 
-/**
- * Bind callback to keyboard event. Activate setLogKey to print key codes to
- * console.
- * @param {int} key Key id number (http://keycode.info/)
- * @param {keyEvent} cb Event callback
- */
-rfGame.prototype.bindKey = function(key, cb) {
+rfGame.prototype.enableKeyboard = function() {
 	var self = this;
+
 	if (!this.enabledKeyboard) {
 		document.addEventListener('keydown', function(event) {
 			self._keyEvent(event, true);
@@ -235,7 +230,16 @@ rfGame.prototype.bindKey = function(key, cb) {
 		});
 		this.enabledKeyboard = true;
 	}
+}
 
+/**
+ * Bind callback to keyboard event. Activate setLogKeys to print key codes to
+ * console.
+ * @param {int} key Key id number (http://keycode.info/)
+ * @param {keyEvent} cb Event callback
+ */
+rfGame.prototype.bindKey = function(key, cb) {
+	this.enableKeyboard();
 	this.keyBinds[key] = cb;
 };
 
@@ -244,6 +248,7 @@ rfGame.prototype.bindKey = function(key, cb) {
  * @param {boolean} on Enable
  */
 rfGame.prototype.setLogKeys = function(on) {
+	this.enableKeyboard();
 	this.enabledLogKeys = on;
 };
 
