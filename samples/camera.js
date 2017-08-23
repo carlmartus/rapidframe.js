@@ -1,14 +1,3 @@
-<html>
-
-<head>
-<meta charset="utf-8">
-</head>
-
-<body onload="main()">
-<canvas width="400" height="300" id="can"></canvas>
-
-<script>
-'use strict';
 var rf, gl, camera;
 
 var GLSL_VERT = `
@@ -55,13 +44,12 @@ function render() {
 	gl.drawArrays(gl.TRIANGLES, 0, 3);
 }
 
-function main() {
-	rf = new rfGame('can');
+function mainCamera() {
+	rf = new rfGame('canvas');
 	gl = rf.setupWebGl({antialias: false});
 	rf.setResizeCallback(function(w, h) {
 		gl.viewport(0, 0, w, h);
 	});
-	rf.enableFullFrame();
 
 	rf.bindKey(70, function(key, press) {
 		if (press) {
@@ -83,7 +71,7 @@ function main() {
 	});
 
 	rf.setLogKeys(true);
-	rf.captureMouse(true);
+	//rf.captureMouse(true);
 
 	rf.setResizeCallback(function(w, h) {
 		gl.viewport(0, 0, w, h);
@@ -114,10 +102,4 @@ function main() {
 
 	rf.startLoop(frame, render);
 }
-</script>
-
-<script type="text/javascript" src="../rapidframe.js"></script>
-</body>
-
-</html>
 
