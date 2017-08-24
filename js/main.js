@@ -158,6 +158,7 @@ rfGame.prototype.captureMouse = function() {
  * Mouse button event callback.
  * @callback mouseButton
  * @param {boolean} press Button down
+ * @param {int} pres buttons press bitmask
  */
 
 /**
@@ -335,10 +336,8 @@ rfGame.prototype._eventMouseLockChange = function(event) {
 			document.mozPointerLockElement === can ||
 			document.webkitPointerLockElement === can) {
 		this.mouseAutoCapture = true;
-		console.log(true);
 	} else {
 		this.mouseAutoCapture = false;
-		console.log(false);
 	}
 };
 
@@ -368,11 +367,11 @@ rfGame.prototype._listenMouse = function() {
 	}, false);
 
 	this.tag.addEventListener('mousedown', function(event) {
-		if (self.cbMouseClick)	self.cbMouseClick(true);
+		if (self.cbMouseClick)	self.cbMouseClick(true, event.buttons);
 	}, false);
 
 	this.tag.addEventListener('mouseup', function(event) {
-		if (self.cbMouseClick)	self.cbMouseClick(false);
+		if (self.cbMouseClick)	self.cbMouseClick(false, event.buttons);
 	}, false);
 }
 
