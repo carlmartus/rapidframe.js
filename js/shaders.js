@@ -144,7 +144,7 @@ rfProgram.prototype.use = function() {
 	for (var i=0; i<this.uniformLinks.length; i++) {
 		var link = this.uniformLinks[i];
 		if (link[0] != link[1].magic) {
-			link[1].cb(gl, link[2]);
+			link[1].cb(this.gl, link[2]);
 			link[0] = link[1].magic;
 		}
 	}
