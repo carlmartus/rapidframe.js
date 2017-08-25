@@ -103,6 +103,12 @@ rfBuffer.prototype.createGlArrayBuffer = function(gl, usage) {
 	return va;
 };
 
+/**
+ * Update an existing array buffer with the content from the rfBuffer.
+ * @param {GlContext} gl OpenGL context.
+ * @param {rfGeometry} geo Destination geometry to update.
+ * @param {int} bufferId Id of the buffer inside the geo instance.
+ */
 rfBuffer.prototype.updateGeometry = function(gl, geo, bufferId) {
 	gl.bindBuffer(gl.ARRAY_BUFFER, geo.buffers[bufferId]);
 	gl.bufferSubData(gl.ARRAY_BUFFER, 0,
